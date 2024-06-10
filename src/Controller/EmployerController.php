@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Utilisateur;
 use App\Form\UtilisateurType;
+use App\Repository\EmployerRepository;
 use App\Repository\UtilisateurRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
@@ -17,15 +18,27 @@ use Symfony\Component\HttpFoundation\Request;
 class EmployerController extends AbstractController
 {
 
-    //------------------------------------Lister liste employer------------------------------------------------
+    //------------------------------------Lister liste compte employer------------------------------------------------
 
-    #[Route('/list/employer', name: 'app_employer', methods: ['GET'])]
+    #[Route('/list/compte', name: 'app_compte', methods: ['GET'])]
     public function index(UtilisateurRepository $utilisateurRepository): Response
     {
-        return $this->render('employer/affiche.html.twig', [
+        return $this->render('employer/afficheCompte.html.twig', [
             'utilisateurs' => $utilisateurRepository->findAll(),
         ]);
     }
+
+    //------------------------------------Lister employer------------------------------------------------
+
+    #[Route('/list/employer', name: 'app_employer', methods: ['GET'])]
+    public function employer(EmployerRepository $employerRepository): Response
+    {
+        return $this->render('employer/employerAffich.html.twig', [
+            'employers' => $employerRepository->findAll(),
+        ]);
+    }
+
+
     //-----------------------------------Suppprimer employer-----------------------------------------------------------
 
     #[Route('/delete/{id}', name:"utilisateurDelete")]

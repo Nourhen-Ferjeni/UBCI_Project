@@ -1,0 +1,88 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+	<main id="main" class="main">
+
+		<div class="pagetitle">
+			<h1>Employer</h1>
+			<nav>
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item">
+						<a href="index.html">Gestion Employer</a>
+					</li>
+					<li class="breadcrumb-item active">Affichage</li>
+				</ol>
+			</nav>
+		</div>
+		<!-- End Page Title -->
+
+		<section class="section">
+			<div class="row">
+				<div class="col-lg-12">
+
+					<div class="card">
+						<div class="card-body">
+							<h5 class="card-title">Table des employers</h5>
+
+
+							<!-- Table with stripped rows -->
+							<table class="table datatable">
+								<thead>
+									<tr>
+										
+                                        <th>CIN</th>
+                                        <th>Nom et prénom</th>
+										<th>Poste</th>
+                                        <th>Contacte</th>
+                                        <th>Salaire</th>
+                                        <th>Date d'embauche</th>
+                                        <th>Compte</th>
+
+
+									</tr>
+								</thead>
+								<tbody>
+
+									 {% for employer in employers %}
+
+											<tr>
+												<td>{{ employer.cin }} </td>
+												<td>{{ employer.nom }} {{ employer.prenom }}</td>
+												<td>{{ employer.poste }} </td>
+												<td><div>
+														<div class="project-title">
+															<span>{{ employer.email }}</span>
+															<br/>
+															<span>{{ employer.Tel }}
+															</span></td>
+												
+												
+                                                <td>{{ employer.salary }}</td>
+												<td>{{ employer.hiredate|date('d/m/Y') }}</td>
+													
+
+														
+													
+												
+														<td>
+															<a href="#"><img src="/template/assets/img/compte.png" alt="Supprimer" style="width: 20px; height: 20px;"></a>
+														</td>
+
+													</tr>
+
+
+											
+											{% endfor %}
+										</tbody>
+									</table>
+									<!-- End Table with stripped rows -->
+								</tbody>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</section>
+
+		</main>
+		<!-- End #main -->
+	{% endblock %}

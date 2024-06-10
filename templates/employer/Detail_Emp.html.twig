@@ -3,12 +3,12 @@
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Employer</h1>
+      <h1>Compte</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Gestion Employer</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Gestion Compte</a></li>
           
-          <li class="breadcrumb-item active">Details {{ utilisateur.nom }} {{utilisateur.prenom}} </li>
+          <li class="breadcrumb-item active">Details compte {{ utilisateur.nom }} {{utilisateur.prenom}} </li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
@@ -46,7 +46,7 @@
                   <h5 class="card-title">A propos</h5>
                   <p class="small fst-italic">{{ utilisateur.apropos }} </p>
 
-                  <h5 class="card-title"> Details Employer</h5>
+                  <h5 class="card-title"> Details Compte Employer</h5>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label ">Nom et Prénom</div>
@@ -56,6 +56,11 @@
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Entreprise</div>
                     <div class="col-lg-9 col-md-8">Ubci Banque</div>
+                  </div>
+
+                   <div class="row">
+                    <div class="col-lg-3 col-md-4 label ">Num de CIN</div>
+                    <div class="col-lg-9 col-md-8">{{ utilisateur.cin}}</div>
                   </div>
 
                   <div class="row">
@@ -72,6 +77,11 @@
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Email</div>
                     <div class="col-lg-9 col-md-8">{{ utilisateur.email }}</div>
+                  </div>
+
+                   <div class="row">
+                    <div class="col-lg-3 col-md-4 label ">login</div>
+                    <div class="col-lg-9 col-md-8">{{ utilisateur.login }}</div>
                   </div>
 
                 </div>

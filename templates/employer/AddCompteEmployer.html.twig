@@ -1,127 +1,121 @@
 {% extends 'base.html.twig' %}
 {% block body %}
 
-  <main id="main" class="main">
+<main id="main" class="main">
 
-    <div class="pagetitle">
-      <h1>Ajouter Compte</h1>
-      <nav>
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Gestion employer</a></li>
-          <li class="breadcrumb-item active">Compte</li>
-        </ol>
-      </nav>
-    </div><!-- End Page Title -->
+  <div class="pagetitle">
+    <h1>Ajouter Compte</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#">Gestion des Comptes</a></li>
+        <li class="breadcrumb-item active">Ajout Compte</li>
+      </ol>
+    </nav>
+  </div><!-- End Page Title -->
 
-    <section class="section">
-      <div class="row">
-        <div class="col-lg-12">
+  <section class="section">
+    <div class="row">
+      <div class="col-lg-12">
 
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Formulaire d'ajout compte employer</h5>
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Formulaire d'ajout compte employer</h5>
 
-              <!-- General Form Elements -->
-              <form method="post">
-              
+            <!-- Symfony Form Start -->
+            {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
 
-                <div class="row mb-3">
-                  <label for="inputText" class="col-sm-2 col-form-label">Nom</label>
-                  <div class="col-sm-10">
-                    <input type="text" class="form-control">
-                  </div>
-                </div>
-
-
-                <div class="row mb-3">
-                  <label for="inputEmail" class="col-sm-2 col-form-label">Prénom</label>
-                  <div class="col-sm-10">
-                    <input type="email" class="form-control">
-                  </div>
-                </div>
-
-                <div class="row mb-3">
-                  <label for="inputEmail" class="col-sm-2 col-form-label">Genre</label>
-                  <div class="col-sm-10">
-                    <input type="email" class="form-control">
-                  </div>
-                </div>
-
-                <div class="row mb-3">
-                  <label for="inputNumber" class="col-sm-2 col-form-label">Image</label>
-                  <div class="col-sm-10">
-                    <input class="form-control" type="file" id="formFile">
-                  </div>
-                </div>
-
-                <div class="row mb-3">
-                  <label for="inputEmail" class="col-sm-2 col-form-label">Num cin</label>
-                  <div class="col-sm-10">
-                    <input type="email" class="form-control">
-                  </div>
-                </div>
-
-                <div class="row mb-3">
-                  <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
-                  <div class="col-sm-10">
-                    <input type="email" class="form-control">
-                  </div>
-                </div>
-
-                <div class="row mb-3">
-                  <label for="inputEmail" class="col-sm-2 col-form-label">Téléphone</label>
-                  <div class="col-sm-10">
-                    <input type="email" class="form-control">
-                  </div>
-                </div>
-
-                <div class="row mb-3">
-                  <label for="inputEmail" class="col-sm-2 col-form-label">A propos</label>
-                  <div class="col-sm-10">
-                    <input type="email" class="form-control">
-                  </div>
-                </div>
-
-                <div class="row mb-3">
-                  <label for="inputEmail" class="col-sm-2 col-form-label">Poste</label>
-                  <div class="col-sm-10">
-                    <input type="email" class="form-control">
-                  </div>
-                </div>
-
-                <div class="row mb-3">
-                  <label for="inputEmail" class="col-sm-2 col-form-label">Login</label>
-                  <div class="col-sm-10">
-                    <input type="email" class="form-control">
-                  </div>
-                </div>
-
-
-                <div class="row mb-3">
-                  <label for="inputPassword" class="col-sm-2 col-form-label">Mot de passe</label>
-                  <div class="col-sm-10">
-                    <input type="password" class="form-control">
-                  </div>
-                </div>
-                
-</br>
-                <div class="row mb-3">
-                 
-                  <div class="col-sm-10">
-                    <button type="submit" class="btn btn-primary">Submit Form</button>
-                  </div>
-                </div>
-
-              </form><!-- End General Form Elements -->
-
+            <div class="row mb-3">
+              <label for="inputText" class="col-sm-2 col-form-label">Nom</label>
+              <div class="col-sm-10">
+                {{ form_widget(form.nom, {'attr': {'class': 'form-control'}}) }}
+              </div>
             </div>
-          </div>
 
+            <div class="row mb-3">
+              <label for="inputEmail" class="col-sm-2 col-form-label">Prénom</label>
+              <div class="col-sm-10">
+                {{ form_widget(form.prenom, {'attr': {'class': 'form-control'}}) }}
+              </div>
+            </div>
+            
+
+            <div class="row mb-3">
+    <label for="inputEmail" class="col-sm-2 col-form-label">Genre</label>
+    <div class="col-sm-10">
+        {{ form_widget(form.genre, {'attr': {'class': 'form-select'}}) }}
+    </div>
+</div>
+
+            
+
+            <div class="row mb-3">
+              <label for="inputEmail" class="col-sm-2 col-form-label">Num cin</label>
+              <div class="col-sm-10">
+                {{ form_widget(form.cin, {'attr': {'class': 'form-control'}}) }}
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
+              <div class="col-sm-10">
+                {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <label for="inputEmail" class="col-sm-2 col-form-label">Téléphone</label>
+              <div class="col-sm-10">
+                {{ form_widget(form.Tel, {'attr': {'class': 'form-control'}}) }}
+              </div>
+            </div>
+
+            
+
+            <div class="row mb-3">
+              <label for="inputEmail" class="col-sm-2 col-form-label">A propos</label>
+              <div class="col-sm-10">
+                {{ form_widget(form.apropos, {'attr': {'class': 'form-control'}}) }}
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <label for="inputEmail" class="col-sm-2 col-form-label">Poste</label>
+              <div class="col-sm-10">
+                {{ form_widget(form.poste, {'attr': {'class': 'form-control'}}) }}
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <label for="inputEmail" class="col-sm-2 col-form-label">Login</label>
+              <div class="col-sm-10">
+                {{ form_widget(form.login, {'attr': {'class': 'form-control'}}) }}
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <label for="inputPassword" class="col-sm-2 col-form-label">Mot de passe</label>
+              <div class="col-sm-10">
+                {{ form_widget(form.mdp, {'attr': {'class': 'form-control'}}) }}
+              </div>
+            </div>
+    </br>
+            <div class="row mb-3">
+              <div class="col-sm-10 offset-sm-2">
+                <button type="submit" class="btn btn-primary">Ajouter Compte</button>
+              </div>
+            </div>
+
+            <!-- Symfony Form End -->
+            {{ form_end(form) }}
+
+          </div>
         </div>
 
       </div>
-    </section>
 
-  </main><!-- End #main -->
+    </div>
+  </section>
 
- {% endblock %}
+</main><!-- End #main -->
+
+{% endblock %}

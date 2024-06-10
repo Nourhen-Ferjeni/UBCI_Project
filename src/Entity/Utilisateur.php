@@ -18,7 +18,6 @@ use Doctrine\Common\Collections\Collection;
     name: "utilisateur",
     uniqueConstraints: [
         new ORM\UniqueConstraint(name: "login", columns: ["login"]),
-        new ORM\UniqueConstraint(name: "email", columns: ["email"])
     ]
 )]
 
@@ -30,25 +29,9 @@ class Utilisateur
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
-    #[Assert\Length(min:"2",
-    minMessage:"Votre nom doit contenir au moin 2 lettres")]
-    private ?string $nom = null;
+    
 
-    #[ORM\Column(length: 255)]
-    #[Assert\Length(min:"2",
-    minMessage:"Votre nom doit contenir au moin 2 lettres")]
-    private ?string $prenom = null;
-
-    #[ORM\Column(length: 255)]  
-    #[Assert\Email(message: "l'email {{ value }} is not a valid email.",)]
-    private ?string $email = null;
-
-    #[ORM\Column]
-    #[Assert\Length(min:"8",max:"8",
-    minMessage:"Le numéro de téléphone avoir exactement 8 chiffres",
-    maxMessage:"Le numéro de téléphone avoir exactement 8 chiffres")]
-    private ?int $Tel = null;
+   
 
     #[ORM\Column(length: 255)]
     private ?string $login = null;
@@ -63,17 +46,12 @@ class Utilisateur
     #[ORM\Column(length: 255)]
     private ?string $genre = null;
 
-    #[ORM\Column]
-    #[Assert\Length(min:"8",max:"8",
-     minMessage:"Le numéro de téléphone avoir exactement 8 chiffres",
-     maxMessage:"Le numéro de téléphone avoir exactement 8 chiffres")]
-     private ?int $cin = null;
+    
 
      #[ORM\Column(length: 255)]
      private ?string $image = null;
 
-     #[ORM\Column(length: 255)]
-     private ?string $poste = null;
+    
 
      #[ORM\Column]
     private ?int $role = null;
@@ -90,49 +68,8 @@ class Utilisateur
     return $this->dateajout;
 }
 
-public function getNom(): ?string
-{
-    return $this->nom;
-}
 
-public function setNom(string $nom): self
-{
-    $this->nom = $nom;
-    return $this;
-}
 
-public function getPrenom(): ?string
-{
-    return $this->prenom;
-}
-
-public function setPrenom(string $prenom): self
-{
-    $this->prenom = $prenom;
-    return $this;
-}
-
-public function getEmail(): ?string
-{
-    return $this->email;
-}
-
-public function setEmail(string $email): self
-{
-    $this->email = $email;
-    return $this;
-}
-
-public function getTel(): ?int
-{
-    return $this->Tel;
-}
-
-public function setTel(int $Tel): self
-{
-    $this->Tel = $Tel;
-    return $this;
-}
 
 public function getLogin(): ?string
 {
@@ -178,16 +115,7 @@ public function setGenre(string $genre): self
     return $this;
 }
 
-public function getCin(): ?int
-{
-    return $this->cin;
-}
 
-public function setCin(int $cin): self
-{
-    $this->cin = $cin;
-    return $this;
-}
 
 public function getImage(): ?string
 {
@@ -200,16 +128,7 @@ public function setImage(string $image): self
     return $this;
 }
 
-public function getPoste(): ?string
-{
-    return $this->poste;
-}
 
-public function setPoste(string $poste): self
-{
-    $this->poste = $poste;
-    return $this;
-}
 
 public function getRole(): ?int
 {
