@@ -1,0 +1,94 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Employer</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Gestion Employer</a></li>
+          
+          <li class="breadcrumb-item active">Details {{ utilisateur.nom }} {{utilisateur.prenom}} </li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section profile">
+      <div class="row">
+        <div class="col-xl-4">
+
+          <div class="card">
+            <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+
+              <img src="{{ asset('upload/' ~ utilisateur.image) }}" alt="Profile" class="rounded-circle">
+              <h2>{{ utilisateur.nom }} {{utilisateur.prenom}}</h2>
+              <h3>{{ utilisateur.poste }}</h3>
+              <div class="social-links mt-2">
+                <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+                <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+                <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="col-xl-8">
+
+          <div class="card">
+            <div class="card-body pt-3">
+              <!-- Bordered Tabs -->
+              
+              <div class="tab-content pt-2">
+
+                <div class="tab-pane fade show active profile-overview" id="profile-overview">
+                  <h5 class="card-title">A propos</h5>
+                  <p class="small fst-italic">{{ utilisateur.apropos }} </p>
+
+                  <h5 class="card-title"> Details Employer</h5>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label ">Nom et Prénom</div>
+                    <div class="col-lg-9 col-md-8">{{ utilisateur.nom }} {{utilisateur.prenom}}</div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Entreprise</div>
+                    <div class="col-lg-9 col-md-8">Ubci Banque</div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Poste</div>
+                    <div class="col-lg-9 col-md-8">{{ utilisateur.poste }}</div>
+                  </div>
+
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Téléphone</div>
+                    <div class="col-lg-9 col-md-8">{{ utilisateur.Tel }}</div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Email</div>
+                    <div class="col-lg-9 col-md-8">{{ utilisateur.email }}</div>
+                  </div>
+
+                </div>
+
+                
+
+                
+
+              </div><!-- End Bordered Tabs -->
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+{% endblock %}
+ 
