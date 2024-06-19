@@ -29,7 +29,9 @@ class Utilisateur
     #[ORM\Column]
     private ?int $id = null;
 
-    
+    #[ORM\ManyToOne(targetEntity: Employer::class)]
+    #[ORM\JoinColumn(name: "employer", referencedColumnName: "idemployer")]
+    private ?Employer $employer = null; // Renommé pour correspondre à votre template
 
    
 
@@ -43,8 +45,7 @@ class Utilisateur
     // #[Assert\NotBlank(message: "champ obligatoire")]
     private ?string $mdp = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $genre = null;
+    
 
     
 
@@ -82,6 +83,18 @@ public function setLogin(string $login): self
     return $this;
 }
 
+public function getEmployer(): ?Employer
+    {
+        return $this->employer;
+    }
+
+public function setEmployer(?Employer $employer): self
+    {
+        $this->employer = $employer;
+        return $this;
+    }
+
+
 public function getApropos(): ?string
 {
     return $this->apropos;
@@ -104,16 +117,7 @@ public function setMdp(string $mdp): self
     return $this;
 }
 
-public function getGenre(): ?string
-{
-    return $this->genre;
-}
 
-public function setGenre(string $genre): self
-{
-    $this->genre = $genre;
-    return $this;
-}
 
 
 

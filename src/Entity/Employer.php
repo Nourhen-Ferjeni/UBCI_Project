@@ -12,7 +12,7 @@ class Employer
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id = null;
+    private ?int $idemployer = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\Length(min:"2",
@@ -40,11 +40,7 @@ class Employer
     #[ORM\Column(type :"date")]
     private ?\DateTimeInterface $hiredate = null;
 
-    #[ORM\Column]
-    private ?int $performance_reviews = null;
-
-    #[ORM\Column]
-    private ?int $leaves = null;
+    
 
     #[ORM\Column]
      private ?int $cin = null;
@@ -64,9 +60,9 @@ public function setPoste(string $poste): self
     return $this;
 }
 
-   public function getId(): ?int
+   public function getIdemployer(): ?int
     {
-        return $this->id;
+        return $this->idemployer;
     }
 
     public function getCin(): ?int
@@ -147,27 +143,7 @@ public function setTel(int $Tel): self
         return $this;
     }
 
-    public function getPerformance_reviews(): ?int
-    {
-        return $this->performance_reviews;
-    }
 
-    public function setPerformance_reviews(int $performance_reviews): self
-    {
-        $this->performance_reviews = $performance_reviews;
-        return $this;
-    }
-
-    public function getLeaves(): ?int
-    {
-        return $this->leaves;
-    }
-
-    public function setLeaves(int $leave): self
-    {
-        $this->leaves = $leave;
-        return $this;
-    }
 
     
 }

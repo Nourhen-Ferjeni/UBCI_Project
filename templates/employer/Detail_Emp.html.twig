@@ -1,104 +1,143 @@
 {% extends 'base.html.twig' %}
+
 {% block body %}
-  <main id="main" class="main">
+<main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Compte</h1>
-      <nav>
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Gestion Compte</a></li>
-          
-          <li class="breadcrumb-item active">Details compte {{ utilisateur.nom }} {{utilisateur.prenom}} </li>
-        </ol>
-      </nav>
+        <h1>Employer</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html">Gestion Compte</a></li>
+                <li class="breadcrumb-item active">Details compte {{ employer.nom }} {{ employer.prenom }}</li>
+            </ol>
+        </nav>
     </div><!-- End Page Title -->
 
     <section class="section profile">
-      <div class="row">
-        <div class="col-xl-4">
+        <div class="row">
+            <div class="col-xl-4">
 
-          <div class="card">
-            <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+                <div class="card">
+                    <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
-              <img src="{{ asset('upload/' ~ utilisateur.image) }}" alt="Profile" class="rounded-circle">
-              <h2>{{ utilisateur.nom }} {{utilisateur.prenom}}</h2>
-              <h3>{{ utilisateur.poste }}</h3>
-              <div class="social-links mt-2">
-                <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
-                <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-                <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-                <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-        <div class="col-xl-8">
-
-          <div class="card">
-            <div class="card-body pt-3">
-              <!-- Bordered Tabs -->
-              
-              <div class="tab-content pt-2">
-
-                <div class="tab-pane fade show active profile-overview" id="profile-overview">
-                  <h5 class="card-title">A propos</h5>
-                  <p class="small fst-italic">{{ utilisateur.apropos }} </p>
-
-                  <h5 class="card-title"> Details Compte Employer</h5>
-
-                  <div class="row">
-                    <div class="col-lg-3 col-md-4 label ">Nom et Prénom</div>
-                    <div class="col-lg-9 col-md-8">{{ utilisateur.nom }} {{utilisateur.prenom}}</div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Entreprise</div>
-                    <div class="col-lg-9 col-md-8">Ubci Banque</div>
-                  </div>
-
-                   <div class="row">
-                    <div class="col-lg-3 col-md-4 label ">Num de CIN</div>
-                    <div class="col-lg-9 col-md-8">{{ utilisateur.cin}}</div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Poste</div>
-                    <div class="col-lg-9 col-md-8">{{ utilisateur.poste }}</div>
-                  </div>
-
-
-                  <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Téléphone</div>
-                    <div class="col-lg-9 col-md-8">{{ utilisateur.Tel }}</div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Email</div>
-                    <div class="col-lg-9 col-md-8">{{ utilisateur.email }}</div>
-                  </div>
-
-                   <div class="row">
-                    <div class="col-lg-3 col-md-4 label ">login</div>
-                    <div class="col-lg-9 col-md-8">{{ utilisateur.login }}</div>
-                  </div>
-
+                        <img src="{{ asset('upload/' ~ image) }}" alt="Profile" class="rounded-circle">
+                        <h2>{{ employer.nom }} {{ employer.prenom }}</h2>
+                        <h3>{{ employer.poste }}</h3>
+                        <div class="social-links mt-2">
+                            <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+                            
+                        </div>
+                    </div>
                 </div>
 
-                
+            </div>
 
-                
+            <div class="col-xl-8">
 
-              </div><!-- End Bordered Tabs -->
+                <div class="card">
+                    <div class="card-body pt-3">
+                        <!-- Bordered Tabs -->
+
+                        <div class="tab-content pt-2">
+
+                            <div class="tab-pane fade show active profile-overview" id="profile-overview">
+
+                                <h5 class="card-title">Details Employer</h5>
+
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label">Nom et Prénom</div>
+                                    <div class="col-lg-9 col-md-8">{{ employer.nom }} {{ employer.prenom }}</div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label">Num de CIN</div>
+                                    <div class="col-lg-9 col-md-8">{{ employer.cin }}</div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label">Entreprise</div>
+                                    <div class="col-lg-9 col-md-8">Ubci Banque</div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label">Poste</div>
+                                    <div class="col-lg-9 col-md-8">{{ employer.poste }}</div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label">Téléphone</div>
+                                    <div class="col-lg-9 col-md-8">{{ employer.Tel }}</div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label">Email</div>
+                                    <div class="col-lg-9 col-md-8">{{ employer.email }}</div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label">Date d'embauche</div>
+                                    <div class="col-lg-9 col-md-8">{{ employer.hiredate|date('d/m/Y') }}</div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label">Salaire</div>
+                                    <div class="col-lg-9 col-md-8">{{ employer.salary }} DT</div>
+                                </div>
+                                  <button class="badge bg-success border-0"><span class="badge bg-success"><i class="bi bi-check-circle me-1"></i>Voir Perfermance</span></button>
+                                <button class="badge bg-info border-0"><span class="badge bg-info text-dark"><i class="bi bi-info-circle me-1"></i>Modifier information</span> </button>
+                                <button class="badge bg-danger border-0" onclick="confirmDelete({{ employer.idemployer }})">
+                                   <span class="badge bg-danger"><i class="bi bi-exclamation-octagon me-1"></i>Supprimer fiche</span>
+                                </button>
+
+                            </div>
+
+                        </div><!-- End Bordered Tabs -->
+
+                    </div>
+                </div>
 
             </div>
-          </div>
-
         </div>
-      </div>
     </section>
 
-  </main><!-- End #main -->
+    <!-- Modal pour confirmation de suppression -->
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmDeleteModalLabel">Confirmation de Suppression</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Êtes-vous sûr de vouloir supprimer cet employé ?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                <form id="deleteForm" method="post" action="{{ path('employerDelete', {'id': 0}) }}" class="d-inline">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <input type="hidden" name="_token" id="deleteFormToken" value="">
+                    <button type="submit" class="btn btn-danger">Supprimer</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</main><!-- End #main -->
+<script>
+    function confirmDelete(employerId) {
+        const form = document.getElementById('deleteForm');
+        const token = '{{ csrf_token('delete') }}' + employerId;
+
+        form.action = '{{ path('employerDelete', {'id': 'EMPLOYER_ID'}) }}'.replace('EMPLOYER_ID', employerId);
+        document.getElementById('deleteFormToken').value = token;
+
+        const myModal = new bootstrap.Modal(document.getElementById('confirmDeleteModal'), {
+            keyboard: false
+        });
+        myModal.show();
+    }
+</script>
+
 {% endblock %}
- 

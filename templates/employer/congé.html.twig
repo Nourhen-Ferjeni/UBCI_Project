@@ -1,0 +1,146 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<main id="main" class="main">
+
+    <div class="pagetitle">
+        <h1>Liste des Congés</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Gestion des congés</a></li>
+                <li class="breadcrumb-item active">Liste des Congés</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
+
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Liste des Congés</h5>
+
+                        <!-- Table avec la liste des congés -->
+                        <table class="table datatable">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#ID Congé</th>
+                                    <th scope="col">Employeur</th>
+                                    <th scope="col">CIN Employeur</th>
+                                    <th scope="col">Date de Début</th>
+                                    <th scope="col">Date de Fin</th>
+                                    <th scope="col">Type</th>
+                                    <th scope="col">Statut</th>
+                                    
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for leave in leaves %}
+                                    <tr>
+                                        <td>{{ leave.id }}</td>
+                                         <td>{{ leave.employer.nom }} {{ leave.employer.prenom }}</td>
+                                        <td>{{ leave.employer.cin }}</td>
+                                        <td>{{ leave.startdate|date('d/m/Y') }}</td>
+                                        <td>{{ leave.enddate|date('d/m/Y') }}</td>
+                                        <td>{{ leave.type }}</td>
+                                        <td>{{ leave.status }}</td>
+                                       
+                                        <td>
+                                            {% if leave.status == 'Accepté' %}
+                                                <span class="badge bg-success">Déjà accepté</span>
+                                            {% elseif leave.status == 'Refusé' %}
+                                                <span class="badge bg-danger">Refusé</span>
+                                            {% else %}
+                                                <button class="badge bg-warning border-0" onclick="confirmAccept({{ leave.id }})">Accepter</button>
+                                                <button class="badge bg-dark border-0" onclick="confirmDelete({{ leave.id }})">Réfuser</button>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        <!-- Fin de la table -->
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal pour refuser -->
+    <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmDeleteModalLabel">Confirmation de Refus</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Êtes-vous sûr de vouloir refuser ce congé ?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                    <form id="deleteForm" method="post" action="" class="d-inline">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <input type="hidden" name="_token" id="deleteFormToken" value="">
+                        <button type="submit" class="btn btn-danger">Réfuser</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal pour accepter -->
+    <div class="modal fade" id="confirmAcceptModal" tabindex="-1" aria-labelledby="confirmAcceptModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmAcceptModalLabel">Confirmation d'Acceptation</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Êtes-vous sûr de vouloir accepter ce congé ?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                    <form id="acceptForm" method="post" action="" class="d-inline">
+                        <input type="hidden" name="_token" id="acceptFormToken" value="">
+                        <button type="submit" class="btn btn-success">Accepter</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main><!-- End #main -->
+
+<script>
+    function confirmDelete(leaveId) {
+        const form = document.getElementById('deleteForm');
+        const token = '{{ csrf_token('delete') }}' + leaveId;
+
+        form.action = '{{ path('leave_delete', {'id': 'LEAVE_ID'}) }}'.replace('LEAVE_ID', leaveId);
+        document.getElementById('deleteFormToken').value = token;
+
+        const myModal = new bootstrap.Modal(document.getElementById('confirmDeleteModal'), {
+            keyboard: false
+        });
+        myModal.show();
+    }
+
+    function confirmAccept(leaveId) {
+        const form = document.getElementById('acceptForm');
+        const token = '{{ csrf_token('accept') }}' + leaveId;
+
+        form.action = '{{ path('leave_accepter', {'id': 'LEAVE_ID'}) }}'.replace('LEAVE_ID', leaveId);
+        document.getElementById('acceptFormToken').value = token;
+
+        const myModal = new bootstrap.Modal(document.getElementById('confirmAcceptModal'), {
+            keyboard: false
+        });
+        myModal.show();
+    }
+</script>
+{% endblock %}

@@ -24,5 +24,13 @@ class TestController extends AbstractController
         ]);
     }
 
+    #[Route('/test3', name: 'app_test2')]
+    public function index3(): Response
+    {
+        return $this->render('employer/congé.html.twig', [
+            'controller_name' => 'TestController',
+        ]);
+    }
+
     
 }

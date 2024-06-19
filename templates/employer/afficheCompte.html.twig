@@ -21,7 +21,7 @@
 
 					<div class="card">
 						<div class="card-body">
-							<h5 class="card-title">Datatables</h5>
+							<h5 class="card-title">Liste des compte</h5>
 
 
 							<!-- Table with stripped rows -->
@@ -45,17 +45,16 @@
 										{% if u.role  != 0 %}
 
 											<tr>
-												<td><img src="{{ asset('upload/' ~ u.image) }}" alt="Image" style="width: 40px; height: 40px"></td>
-												<td>{{ u.nom }}
-													{{u.prenom}}</td>
+												<td><img src="{{ asset('upload/' ~ u.image) }}" alt="Image" style="width: 60px; height: 70px"></td>
+												<td>{{ u.employer.nom }} {{ u.employer.prenom }}</td>
 												
-												<td>{{u.poste}}</td>
+												<td>{{u.employer.poste}}</td>
 												<td>
 													<div>
 														<div class="project-title">
-															<span>{{ u.email }}</span>
+															<span>{{ u.employer.email }}</span>
 															<br/>
-															<span>{{ u.Tel }}
+															<span>{{ u.employer.Tel }}
 															</span>
 														</td>
 														<td>

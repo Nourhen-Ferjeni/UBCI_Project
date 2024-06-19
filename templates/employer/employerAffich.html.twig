@@ -21,68 +21,85 @@
 
 					<div class="card">
 						<div class="card-body">
-							<h5 class="card-title">Table des employers</h5>
+							<h5 class="card-title">Liste des employers</h5>
 
 
 							<!-- Table with stripped rows -->
 							<table class="table datatable">
 								<thead>
 									<tr>
-										
-                                        <th>CIN</th>
-                                        <th>Nom et prénom</th>
+
+										<th>CIN</th>
+										<th>Nom et prénom</th>
 										<th>Poste</th>
-                                        <th>Contacte</th>
-                                        <th>Salaire</th>
-                                        <th>Date d'embauche</th>
-                                        <th>Compte</th>
+										<th>Contacte</th>
+										<th>Date d'embauche</th>
+										<th>Fiche</th>
+										<th>Compte</th>
 
 
 									</tr>
 								</thead>
 								<tbody>
 
-									 {% for employer in employers %}
+									{% for employer in employers %}
 
-											<tr>
-												<td>{{ employer.cin }} </td>
-												<td>{{ employer.nom }} {{ employer.prenom }}</td>
-												<td>{{ employer.poste }} </td>
-												<td><div>
-														<div class="project-title">
-															<span>{{ employer.email }}</span>
-															<br/>
-															<span>{{ employer.Tel }}
-															</span></td>
-												
-												
-                                                <td>{{ employer.salary }}</td>
-												<td>{{ employer.hiredate|date('d/m/Y') }}</td>
-													
+										<tr>
+											<td>{{ employer.cin }}
+											</td>
+											<td>{{ employer.nom }}
+												{{ employer.prenom }}</td>
+											<td>{{ employer.poste }}
+											</td>
+											<td>
+												<div>
+													<div class="project-title">
+														<span>{{ employer.email }}</span>
+														<br/>
+														<span>{{ employer.Tel }}
+														</span>
+													</td>
 
-														
+
 													
-												
-														<td>
-															<a href="#"><img src="/template/assets/img/compte.png" alt="Supprimer" style="width: 20px; height: 20px;"></a>
+													<td>{{ employer.hiredate|date('d/m/Y') }}</td>
+													<td>
+															
+															<a href="{{ path('utilisateurDetails', {'id': employer.idemployer}) }}">
+																Detail
+															</a>
+
 														</td>
 
-													</tr>
 
+													<td class="text-center">
+														{% if employerAccounts[employer.idemployer] %}
+															 <a href="#" class="d-flex justify-content-center">
+                                                    <img src="/template/assets/img/trouve.png" alt="decouvrir" style="width: 20px; height: 20px;">
+                                                </a>
+														{% else %}
+															 <a href="{{ path('app_utilisateur_new', {'id': employer.idemployer}) }}" class="d-flex justify-content-center">
+                                                    <img src="/template/assets/img/add.png" alt="add" style="width: 20px; height: 20px;">
+                                                </a>
+														{% endif %}
+													</td>
+													
+ 
 
-											
+												</tr>
 											{% endfor %}
-										</tbody>
-									</table>
-									<!-- End Table with stripped rows -->
+										</tr>
+									</tbody>
 								</tbody>
-							</div>
-						</div>
-
+							</table>
+							<!-- End Table with stripped rows -->
+						</tbody>
 					</div>
 				</div>
-			</section>
 
-		</main>
-		<!-- End #main -->
-	{% endblock %}
+			</div>
+		</div>
+	</section>
+
+</main>
+<!-- End #main -->{% endblock %}
