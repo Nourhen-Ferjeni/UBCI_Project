@@ -83,7 +83,12 @@
                                     <div class="col-lg-3 col-md-4 label">Salaire</div>
                                     <div class="col-lg-9 col-md-8">{{ employer.salary }} DT</div>
                                 </div>
-                                  <button class="badge bg-success border-0"><span class="badge bg-success"><i class="bi bi-check-circle me-1"></i>Voir Perfermance</span></button>
+                                  <button class="badge bg-success border-0">
+    <a href="{{ path('absences_by_employer', {'idemployer': employer.idemployer}) }}" class="badge bg-success text-decoration-none text-white">
+        <i class="bi bi-check-circle me-1"></i>Voir Performance
+    </a>
+</button>
+
                                 <button class="badge bg-info border-0"><span class="badge bg-info text-dark"><i class="bi bi-info-circle me-1"></i>Modifier information</span> </button>
                                 <button class="badge bg-danger border-0" onclick="confirmDelete({{ employer.idemployer }})">
                                    <span class="badge bg-danger"><i class="bi bi-exclamation-octagon me-1"></i>Supprimer fiche</span>

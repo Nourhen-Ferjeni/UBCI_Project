@@ -1,0 +1,148 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Performance de l'employer {{ employer.nom }} {{ employer.prenom }}</h1>
+      <nav>
+        <ol class="breadcrumb">
+					<li class="breadcrumb-item">
+						<a href="index.html">Gestion Employer</a>
+					</li>
+					<li class="breadcrumb-item active">Absence</li>
+				</ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section dashboard">
+      <div class="row">
+
+        <!-- Left side columns -->
+        <div class="col-lg-8">
+          <div class="row">
+
+        
+
+
+            <!-- Recent Sales -->
+            <div class="col-12">
+              <div class="card recent-sales overflow-auto">
+
+                
+
+                <div class="card-body">
+                  <h5 class="card-title">Absences de {{ employer.nom }} {{ employer.prenom }}</h5>
+
+                  <table class="table table-borderless datatable">
+                    <thead>
+                      <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Date</th>
+                                    <th scope="col">Statut</th>
+                                </tr>
+                    </thead>
+                    <tbody>
+                       {% for absence in absences %}
+                                    <tr>
+                                        <th scope="row">{{ absence.id }}</th>
+                                        <td>{{ absence.date|date('d-m-Y') }}</td>
+                                        <td>{{ absence.status }}</td>
+                                    </tr>
+                                {% else %}
+                                    <tr>
+                                        <td colspan="3">Aucune absence trouvée pour cet employé.</td>
+                                    </tr>
+                                {% endfor %}
+                    </tbody>
+                  </table>
+
+                </div>
+
+              </div>
+            </div><!-- End Recent Sales -->
+
+          </div>
+        </div><!-- End Left side columns -->
+
+        <!-- Right side columns -->
+        <div class="col-lg-4">
+
+          <!-- Website Traffic -->
+          <div class="card">
+           
+
+            <div class="card-body pb-0">
+              <h5 class="card-title">Absence <span>| Statistique</span></h5>
+
+
+
+              <div id="absencePieChart" style="min-height: 400px;" class="echart"></div>
+              <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        var chartDom = document.getElementById('absencePieChart');
+        var myChart = echarts.init(chartDom);
+        var option;
+
+        option = {
+            tooltip: {
+                trigger: 'item'
+            },
+            legend: {
+                top: '5%',
+                left: 'center'
+            },
+            series: [{
+                name: 'Absences',
+                type: 'pie',
+                radius: ['40%', '70%'],
+                avoidLabelOverlap: false,
+                label: {
+                    show: false,
+                    position: 'center'
+                },
+                emphasis: {
+                    label: {
+                        show: true,
+                        fontSize: '18',
+                        fontWeight: 'bold'
+                    }
+                },
+                labelLine: {
+                    show: false
+                },
+                data: [
+                    { value: {{ data['non justifier'] }}, name: 'Non Justifier' },
+                    { value: {{ data['congé'] }}, name: 'Congé' },
+                    { value: {{ data['autre'] }}, name: 'Autre' }
+                ]
+            }]
+        };
+
+        option && myChart.setOption(option);
+    });
+</script>
+
+            </div>
+          </div><!-- End Website Traffic -->
+
+          
+
+        </div><!-- End Right side columns -->
+
+      </div>
+    </section>
+
+    
+
+  </main>
+  
+<!-- End #main -->
+{% endblock %}
+
+
+
+
+
+
+

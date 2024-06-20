@@ -2,11 +2,14 @@
 
 namespace App\Controller;
 
+use App\Entity\Absence;
 use App\Entity\Employer;
 use App\Entity\Leave;
 use App\Entity\Utilisateur;
+use App\Form\AbsenceSearchType;
 use App\Form\EmployeyType;
 use App\Form\UtilisateurType;
+use App\Repository\AbsenceRepository;
 use App\Repository\EmployerRepository;
 use App\Repository\LeaveRepository;
 use App\Repository\UtilisateurRepository;
@@ -31,6 +34,35 @@ class EmployerController extends AbstractController
         return $this->render('employer/afficheCompte.html.twig', [
             'utilisateurs' => $utilisateurRepository->findAll(),
         ]);
+    }
+
+    //------------------------------------Lister liste absence employer------------------------------------------------
+
+    #[Route('/list/absence', name: 'liste_absence', methods: ['GET'])]
+    public function absence(Request $request, AbsenceRepository $absenceRepository): Response
+    {
+        $startDate = $request->query->get('startDate');
+        $endDate = $request->query->get('endDate');
+        
+        $query = $absenceRepository->createQueryBuilder('a')
+            ->where('1=1');
+
+        if ($startDate) {
+            $query->andWhere('a.date >= :startDate')
+                  ->setParameter('startDate', new \DateTime($startDate));
+        }
+
+        if ($endDate) {
+            $query->andWhere('a.date <= :endDate')
+                  ->setParameter('endDate', new \DateTime($endDate));
+        }
+
+        $absences = $query->getQuery()->getResult();
+
+        return $this->render('employer/absence.html.twig', [
+            'absences' => $absences,
+        ]);
+    
     }
 
     //------------------------------------Lister employer------------------------------------------------

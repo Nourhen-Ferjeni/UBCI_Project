@@ -21,6 +21,18 @@ class LeaveRepository extends ServiceEntityRepository
         parent::__construct($registry, Leave::class);
     }
 
+    public function countLeavesRequestedToday(): int
+    {
+        $today = (new \DateTime())->setTime(0, 0, 0);
+
+        return $this->createQueryBuilder('l')
+            ->select('count(l.id)')
+            ->where('l.dateajout = :today')
+            ->setParameter('today', $today)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
 //    /**
 //     * @return Leave[] Returns an array of Leave objects
 //     */

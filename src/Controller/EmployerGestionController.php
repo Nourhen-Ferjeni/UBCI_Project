@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Entity\Employer;
 use App\Entity\Leave;
 use App\Form\LeaveType;
+use App\Repository\AbsenceRepository;
+use App\Repository\EmployerRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -61,12 +63,38 @@ public function new(Request $request, EntityManagerInterface $entityManager): Re
     ]);
 }
 
+//----------------------------Absence ByEmployer------------------------------------------
+#[Route('/absences/employer/{idemployer}', name: 'absences_by_employer')]
+    public function absencesByEmployer(int $idemployer, AbsenceRepository $absenceRepository, EmployerRepository $employerRepository): Response
+    {
+        // Récupérer l'employé par son id
+        $employer = $employerRepository->find($idemployer);
 
-    // #[Route('/employer/addCongé', name: 'app_employer_addCongé')]
-    // public function AddCongé(): Response
-    // {
-    //     return $this->render('compteEmployer/addCongé.html.twig', [
-    //         'controller_name' => 'EmployerGestionController',
-    //     ]);
-    // }
+        if (!$employer) {
+            throw $this->createNotFoundException('Employé non trouvé');
+        }
+
+        // Récupérer les absences de l'employé
+        $absences = $absenceRepository->findBy(['employer' => $employer]);
+        $data = [
+            'non justifier' => 0,
+            'congé' => 0,
+            'autre' => 0,
+        ];
+        foreach ($absences as $absence) {
+            if ($absence->getStatus() == 'non justifier') {
+                $data['non justifier']++;
+            } elseif ($absence->getStatus() == 'congé') {
+                $data['congé']++;
+            } else {
+                $data['autre']++;
+            }
+        }
+
+        return $this->render('employer/absences_by_employer.html.twig', [
+            'employer' => $employer,
+            'absences' => $absences,
+            'data' => $data,
+        ]);
+    }
 }
