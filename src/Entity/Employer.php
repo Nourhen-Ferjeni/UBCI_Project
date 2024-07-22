@@ -21,11 +21,11 @@ class Employer
 
     #[ORM\Column(length: 255)]
     #[Assert\Length(min:"2",
-    minMessage:"Votre nom doit contenir au moin 2 lettres")]
+    minMessage:"Votre prenom doit contenir au moin 2 lettres")]
     private ?string $prenom = null;
 
     #[ORM\Column(length: 255)]  
-    #[Assert\Email(message: "l'email {{ value }} is not a valid email.",)]
+    #[Assert\Email(message: "l'email {{ value }} n'est pas valide.",)]
     private ?string $email = null;
 
     #[ORM\Column]

@@ -47,7 +47,15 @@
                                     <tr>
                                         <th scope="row">{{ absence.id }}</th>
                                         <td>{{ absence.date|date('d-m-Y') }}</td>
-                                        <td>{{ absence.status }}</td>
+                                        <td>
+                                            {% if absence.status == 'non justifier' %}
+                                                <span class="badge bg-danger">{{ absence.status }}</span>
+                                            {% elseif absence.status == 'congé' %}
+                                                <span class="badge bg-success">{{ absence.status }}</span>
+                                            {% else %}
+                                                <span class="badge bg-warning">{{ absence.status }}</span>
+                                            {% endif %}
+                                        </td>
                                     </tr>
                                 {% else %}
                                     <tr>

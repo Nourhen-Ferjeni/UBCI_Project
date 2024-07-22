@@ -1,0 +1,55 @@
+{# templates/compteEmployer/listAbsence.html.twig #}
+{% extends 'baseEmployer.html.twig' %}
+
+{% block title %}Liste des Absences{% endblock %}
+
+{% block body %}
+<main id="main" class="main">
+    <div class="pagetitle">
+        <h1>Liste des Absences</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Accueil</a></li>
+                <li class="breadcrumb-item"><a href="#">Profil de {{ employer.nom }} {{ employer.prenom }}</a></li>
+                <li class="breadcrumb-item active">Absences</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section dashboard">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Absences de {{ employer.nom }} {{ employer.prenom }}</h5>
+
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Date</th>
+                                    <th scope="col">Statut</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for absence in absences %}
+                                    <tr>
+                                        <th scope="row">{{ absence.id }}</th>
+                                        <td>{{ absence.date|date('d/m/Y') }}</td>
+                                        <td>{{ absence.status }}</td>
+                                    </tr>
+                                {% else %}
+                                    <tr>
+                                        <td colspan="3">Aucune absence de type "congé" trouvée pour cet employé.</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}

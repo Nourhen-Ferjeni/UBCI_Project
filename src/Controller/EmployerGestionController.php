@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Absence;
 use App\Entity\Employer;
 use App\Entity\Leave;
 use App\Form\LeaveType;
@@ -30,6 +31,9 @@ class EmployerGestionController extends AbstractController
             'controller_name' => 'EmployerGestionController',
         ]);
     }
+
+
+    //-----------------------------------------Ajouter Congé------------------------------------------------------
 
     #[Route('/leave/new', name: 'app_leave_new')]
 public function new(Request $request, EntityManagerInterface $entityManager): Response
@@ -62,6 +66,57 @@ public function new(Request $request, EntityManagerInterface $entityManager): Re
         'form' => $form->createView(),
     ]);
 }
+
+//---------------------------Liste congé--------------------------------------------------
+
+#[Route('/employer/absences', name: 'employer_absences')]
+public function listAbsences(EntityManagerInterface $em): Response
+{
+    $id = 5; // ID de l'employé
+    $employer = $em->getRepository(Employer::class)->find($id);
+
+    if (!$employer) {
+        throw $this->createNotFoundException('No employer found for id ' . $id);
+    }
+
+    $absences = $em->getRepository(Absence::class)->findBy(['employer' => $employer]);
+     // Count the absences
+     $absenceCount = $em->getRepository(Absence::class)->count(['employer' => $employer]);
+
+    return $this->render('compteEmployer/listAbsence.html.twig', [
+        'employer' => $employer,
+        'absences' => $absences,
+        'absenceCount' => $absenceCount,
+        
+    ]);
+}
+
+
+//------------------------Liste congé-----------------------------------------------
+
+#[Route('/employer/listecongé', name: 'employer_congé')]
+public function listCongés(EntityManagerInterface $em): Response
+{
+    $id = 5; // ID de l'employé
+    $employer = $em->getRepository(Employer::class)->find($id);
+
+    if (!$employer) {
+        throw $this->createNotFoundException('No employer found for id ' . $id);
+    }
+
+    $absences = $em->getRepository(Absence::class)->findBy([
+        'employer' => $employer,
+        'status' => 'congé'
+    ]);
+
+    return $this->render('compteEmployer/ListeCongé.html.twig', [
+        'employer' => $employer,
+        'absences' => $absences,
+    ]);
+}
+
+
+
 
 //----------------------------Absence ByEmployer------------------------------------------
 #[Route('/absences/employer/{idemployer}', name: 'absences_by_employer')]
